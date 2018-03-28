@@ -1,2 +1,4 @@
 # bash-lib
-Small library providing some rudimentary features I occasionally need in my bash scripts. 
+Small library providing some rudimentary features I need (from time to time) in one of my several bash scritps.
+
+To use it, just _source_ it (e.g. via `. ./bash-lib/gad-lib.bash`).
