@@ -81,9 +81,10 @@ gad_question()
 
 gad_logLine()
 {
+	local colums=$(tput cols)
 	local labelLength=${#gad_LABEL}
 	local extraLength=3
-	local length=$((${COLUMNS} - ${labelLength} - ${extraLength}))
+	local length=$((${colums} - ${labelLength} - ${extraLength}))
 	local line="$(printf "%${length}s" | tr " " -)"
 
 	gad_log "${line}"
