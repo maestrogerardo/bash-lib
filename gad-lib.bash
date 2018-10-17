@@ -26,7 +26,7 @@ gad_log()
 {
 	local msg="${@}"
 	tput setaf 3; printf "[${gad_LABEL}] " >&2; tput sgr0
-	tput setaf 7; printf "%s\n" ${msg} >&2; tput sgr0
+	tput setaf 7; printf "%s\n" "${msg}" >&2; tput sgr0
 }
 
 gad_readAndContinue()
