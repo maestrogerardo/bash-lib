@@ -78,3 +78,13 @@ gad_question()
 
 	return ${result}
 }
+
+gad_logLine()
+{
+	local labelLength=${#gad_LABEL}
+	local extraLength=3
+	local length=$((${COLUMNS} - ${labelLength} - ${extraLength}))
+	local line="$(printf "%${length}s" | tr " " -)"
+
+	gad_log "${line}"
+}
