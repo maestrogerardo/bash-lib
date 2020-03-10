@@ -22,11 +22,18 @@ gad_LABEL="gad"
 
 # Functions
 
-gad_log()
+
+gad_inlineMessage()
 {
 	local msg="${@}"
 	tput setaf 3; printf "[${gad_LABEL}] " >&2; tput sgr0
 	tput setaf 7; printf "%s\n" "${msg}" >&2; tput sgr0
+}
+
+gad_log()
+{
+	local msg="${@}"
+	gad_inlineMessage "${msg}\n"
 }
 
 gad_readAndContinue()
