@@ -22,25 +22,25 @@ gad_LABEL="gad"
 
 # Functions
 
-
-gad_inlineMessage()
+gad_print()
 {
-	local msg="${@}"
-	tput setaf 3; printf "[${gad_LABEL}] " >&2; tput sgr0
-	tput setaf 7; printf "%s\n" "${msg}" >&2; tput sgr0
+	tput setaf 3; printf "[${gad_LABEL}] "; tput sgr0
+	tput setaf 7; printf "%s" "${@}"; tput sgr0
+}
+
+gad_printLine()
+{
+	gad_print "${@}"; printf "\n"
 }
 
 gad_log()
 {
-	local msg="${@}"
-	gad_inlineMessage "${msg}\n"
+	gad_printLine "${@}" >&2
 }
 
 gad_readAndContinue()
 {
-	local msg="${@}"
-	tput setaf 3; printf "[${gad_LABEL}] "; tput sgr0
-	tput setaf 7; printf "${msg}"; tput sgr0
+	gad_print "${@}"
 	read -p " [RETURN]"
 }
 
@@ -55,8 +55,7 @@ gad_question()
 		default="y"
 	fi
 
-	tput setaf 3; printf "[${gad_LABEL}] "; tput sgr0
-	tput setaf 7; printf "${question}"; tput sgr0
+	gad_print "${question}"
 
 	if [ ${default} = "y" ]; then
 		printf " (Y/n): "
