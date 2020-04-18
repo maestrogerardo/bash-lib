@@ -24,8 +24,11 @@ gad_LABEL="gad"
 
 gad_print()
 {
-	tput setaf 3; printf "[${gad_LABEL}] "; tput sgr0
-	tput setaf 7; printf "%s" "${@}"; tput sgr0
+	tput setaf 3 2>/dev/null || true
+	printf "[${gad_LABEL}] "
+	tput setaf 7 2>/dev/null || true
+	printf "%s" "${@}"
+	tput sgr0 2>/dev/null || true
 }
 
 gad_printLine()
