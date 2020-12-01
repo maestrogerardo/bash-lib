@@ -61,9 +61,9 @@ gad_question()
 	gad_print "${question}"
 
 	if [ ${default} = "y" ]; then
-		printf " (Y/n): "
+		printf " [Y/n]: "
 	else
-		printf " (y/N): "
+		printf " [y/N]: "
 	fi
 
 	read answer
