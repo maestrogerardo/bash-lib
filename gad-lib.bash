@@ -25,9 +25,9 @@ gad_LABEL="gad"
 gad_print()
 {
 	tput setaf 3 2>/dev/null || true
-	printf "[${gad_LABEL}] "
+	printf "[%s] " "${gad_LABEL}"
 	tput setaf 7 2>/dev/null || true
-	printf "%s" "${@}"
+	printf "${@}" # intentionally ignoring shellcheck here
 	tput sgr0 2>/dev/null || true
 }
 
@@ -44,7 +44,7 @@ gad_log()
 gad_readAndContinue()
 {
 	gad_print "${@}"
-	read -p " [RETURN]"
+	read -p -r " [RETURN]"
 }
 
 gad_question()
@@ -54,7 +54,7 @@ gad_question()
 	local default="n"
 
 	# ensure lowercase
-	if [ ${#} -eq 2 ] && [ "${2}" = "y" -o "${2}" = "Y" ]; then
+	if [ ${#} -eq 2 ] && { [ "${2}" = "y" ] || [ "${2}" = "Y" ]; }; then
 		default="y"
 	fi
 
@@ -66,7 +66,7 @@ gad_question()
 		printf " [y/N]: "
 	fi
 
-	read answer
+	read -r answer
 
 	# ensure lowercase
 	if [ "${answer}" = "Y" ]; then
@@ -90,11 +90,11 @@ gad_question()
 
 gad_logLine()
 {
-	local colums=$(tput cols)
+	local columns; columns=$(tput cols)
 	local labelLength=${#gad_LABEL}
 	local extraLength=3
-	local length=$((${colums} - ${labelLength} - ${extraLength}))
-	local line="$(printf "%${length}s" | tr " " -)"
+	local length=$((columns - labelLength - extraLength))
+	local line;	line="$(printf "%${length}s" | tr " " -)"
 
 	gad_log "${line}"
 }
