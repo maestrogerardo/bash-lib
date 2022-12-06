@@ -18,7 +18,7 @@
 
 # Variables
 
-gad_LABEL="gad"
+gad_LABEL="$(basename "${0}")"
 
 # Functions
 
