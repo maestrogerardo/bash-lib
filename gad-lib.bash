@@ -44,7 +44,7 @@ gad_log()
 gad_readAndContinue()
 {
 	gad_print "${@}"
-	read -p -r " [RETURN]"
+	read -p " [RETURN]"
 }
 
 gad_question()
