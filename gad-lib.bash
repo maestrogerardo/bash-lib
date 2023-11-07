@@ -27,7 +27,7 @@ gad_print()
 	tput setaf 3 2>/dev/null || true
 	printf "[%s] " "${gad_LABEL}"
 	tput setaf 7 2>/dev/null || true
-	printf "${@}" # intentionally ignoring shellcheck here
+	printf "${1}" "${@:2}"
 	tput sgr0 2>/dev/null || true
 }
 
@@ -90,11 +90,13 @@ gad_question()
 
 gad_logLine()
 {
-	local columns; columns=$(tput cols)
+	local columns;
+	columns=$(tput cols)
 	local labelLength=${#gad_LABEL}
 	local extraLength=3
 	local length=$((columns - labelLength - extraLength))
-	local line;	line="$(printf "%${length}s" | tr " " -)"
+	local line;
+	line="$(printf "%${length}s" | tr " " "-")"
 
-	gad_log "${line}"
+	gad_log "%s" "${line}"
 }
